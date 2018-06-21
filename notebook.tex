@@ -1,0 +1,1770 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{cat dog classifier CNN model}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{TensorFlow Convolutional Neural Network for Image
+Classification}\label{tensorflow-convolutional-neural-network-for-image-classification}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{time}
+        \PY{k+kn}{import} \PY{n+nn}{math}
+        \PY{k+kn}{import} \PY{n+nn}{random}
+        
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{import} \PY{n+nn}{tensorflow} \PY{k}{as} \PY{n+nn}{tf}
+        \PY{k+kn}{import} \PY{n+nn}{dataset}
+        \PY{k+kn}{import} \PY{n+nn}{cv2}
+        
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{confusion\PYZus{}matrix}
+        \PY{k+kn}{from} \PY{n+nn}{datetime} \PY{k}{import} \PY{n}{timedelta}
+        
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+C:\textbackslash{}Users\textbackslash{}ameypawar\textbackslash{}Anaconda2\textbackslash{}envs\textbackslash{}python3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}h5py\textbackslash{}\_\_init\_\_.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from .\_conv import register\_converters as \_register\_converters
+
+    \end{Verbatim}
+
+    \subsection{Configuration and
+Hyperparameters}\label{configuration-and-hyperparameters}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{} Convolutional Layer 1.}
+        \PY{n}{filter\PYZus{}size1} \PY{o}{=} \PY{l+m+mi}{3} 
+        \PY{n}{num\PYZus{}filters1} \PY{o}{=} \PY{l+m+mi}{32}
+        
+        \PY{c+c1}{\PYZsh{} Convolutional Layer 2.}
+        \PY{n}{filter\PYZus{}size2} \PY{o}{=} \PY{l+m+mi}{3}
+        \PY{n}{num\PYZus{}filters2} \PY{o}{=} \PY{l+m+mi}{32}
+        
+        \PY{c+c1}{\PYZsh{} Convolutional Layer 3.}
+        \PY{n}{filter\PYZus{}size3} \PY{o}{=} \PY{l+m+mi}{3}
+        \PY{n}{num\PYZus{}filters3} \PY{o}{=} \PY{l+m+mi}{64}
+        
+        \PY{c+c1}{\PYZsh{} Fully\PYZhy{}connected layer.}
+        \PY{n}{fc\PYZus{}size} \PY{o}{=} \PY{l+m+mi}{128}             \PY{c+c1}{\PYZsh{} Number of neurons in fully\PYZhy{}connected layer.}
+        
+        \PY{c+c1}{\PYZsh{} Number of color channels for the images: 1 channel for gray\PYZhy{}scale.}
+        \PY{n}{num\PYZus{}channels} \PY{o}{=} \PY{l+m+mi}{3}
+        
+        \PY{c+c1}{\PYZsh{} image dimensions (only squares for now)}
+        \PY{n}{img\PYZus{}size} \PY{o}{=} \PY{l+m+mi}{128}
+        
+        \PY{c+c1}{\PYZsh{} Size of image when flattened to a single dimension}
+        \PY{n}{img\PYZus{}size\PYZus{}flat} \PY{o}{=} \PY{n}{img\PYZus{}size} \PY{o}{*} \PY{n}{img\PYZus{}size} \PY{o}{*} \PY{n}{num\PYZus{}channels}
+        
+        \PY{c+c1}{\PYZsh{} Tuple with height and width of images used to reshape arrays.}
+        \PY{n}{img\PYZus{}shape} \PY{o}{=} \PY{p}{(}\PY{n}{img\PYZus{}size}\PY{p}{,} \PY{n}{img\PYZus{}size}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} class info}
+        \PY{n}{classes} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dogs}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cats}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{num\PYZus{}classes} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{classes}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} batch size}
+        \PY{n}{batch\PYZus{}size} \PY{o}{=} \PY{l+m+mi}{32}
+        
+        \PY{c+c1}{\PYZsh{} validation split}
+        \PY{n}{validation\PYZus{}size} \PY{o}{=} \PY{o}{.}\PY{l+m+mi}{16}
+        
+        \PY{c+c1}{\PYZsh{} how long to wait after validation loss stops improving before terminating training}
+        \PY{n}{early\PYZus{}stopping} \PY{o}{=} \PY{k+kc}{None}  \PY{c+c1}{\PYZsh{} use None if you don\PYZsq{}t want to implement early stoping}
+        
+        \PY{n}{train\PYZus{}path} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data/train/train/}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n}{test\PYZus{}path} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data/test/test/}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n}{checkpoint\PYZus{}dir} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{models/}\PY{l+s+s2}{\PYZdq{}}
+\end{Verbatim}
+
+
+    \subsection{Load Data}\label{load-data}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{data} \PY{o}{=} \PY{n}{dataset}\PY{o}{.}\PY{n}{read\PYZus{}train\PYZus{}sets}\PY{p}{(}\PY{n}{train\PYZus{}path}\PY{p}{,} \PY{n}{img\PYZus{}size}\PY{p}{,} \PY{n}{classes}\PY{p}{,} \PY{n}{validation\PYZus{}size}\PY{o}{=}\PY{n}{validation\PYZus{}size}\PY{p}{)}
+        \PY{n}{test\PYZus{}images}\PY{p}{,} \PY{n}{test\PYZus{}ids} \PY{o}{=} \PY{n}{dataset}\PY{o}{.}\PY{n}{read\PYZus{}test\PYZus{}set}\PY{p}{(}\PY{n}{test\PYZus{}path}\PY{p}{,} \PY{n}{img\PYZus{}size}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Reading training images
+Loading dogs files (Index: 0)
+Loading cats files (Index: 1)
+Reading test images
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Size of:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZhy{} Training\PYZhy{}set:}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{train}\PY{o}{.}\PY{n}{labels}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZhy{} Test\PYZhy{}set:}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{test\PYZus{}images}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZhy{} Validation\PYZhy{}set:}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{valid}\PY{o}{.}\PY{n}{labels}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Size of:
+- Training-set:		21000
+- Test-set:		12500
+- Validation-set:	4000
+
+    \end{Verbatim}
+
+    \subsubsection{Helper-function for plotting
+images}\label{helper-function-for-plotting-images}
+
+    Function used to plot 9 images in a 3x3 grid (or fewer, depending on how
+many images are passed), and writing the true and predicted classes
+below each image.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{k}{def} \PY{n+nf}{plot\PYZus{}images}\PY{p}{(}\PY{n}{images}\PY{p}{,} \PY{n}{cls\PYZus{}true}\PY{p}{,} \PY{n}{cls\PYZus{}pred}\PY{o}{=}\PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+            
+            \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{images}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{no images to show}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                \PY{k}{return} 
+            \PY{k}{else}\PY{p}{:}
+                \PY{n}{random\PYZus{}indices} \PY{o}{=} \PY{n}{random}\PY{o}{.}\PY{n}{sample}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{images}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n+nb}{min}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{images}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{9}\PY{p}{)}\PY{p}{)}
+                
+                
+            \PY{n}{images}\PY{p}{,} \PY{n}{cls\PYZus{}true}  \PY{o}{=} \PY{n+nb}{zip}\PY{p}{(}\PY{o}{*}\PY{p}{[}\PY{p}{(}\PY{n}{images}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{cls\PYZus{}true}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{random\PYZus{}indices}\PY{p}{]}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{} Create figure with 3x3 sub\PYZhy{}plots.}
+            \PY{n}{fig}\PY{p}{,} \PY{n}{axes} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}
+            \PY{n}{fig}\PY{o}{.}\PY{n}{subplots\PYZus{}adjust}\PY{p}{(}\PY{n}{hspace}\PY{o}{=}\PY{l+m+mf}{0.3}\PY{p}{,} \PY{n}{wspace}\PY{o}{=}\PY{l+m+mf}{0.3}\PY{p}{)}
+        
+            \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{ax} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{axes}\PY{o}{.}\PY{n}{flat}\PY{p}{)}\PY{p}{:}
+                \PY{c+c1}{\PYZsh{} Plot image.}
+                \PY{n}{ax}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{images}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{img\PYZus{}size}\PY{p}{,} \PY{n}{img\PYZus{}size}\PY{p}{,} \PY{n}{num\PYZus{}channels}\PY{p}{)}\PY{p}{)}
+        
+                \PY{c+c1}{\PYZsh{} Show true and predicted classes.}
+                \PY{k}{if} \PY{n}{cls\PYZus{}pred} \PY{o+ow}{is} \PY{k+kc}{None}\PY{p}{:}
+                    \PY{n}{xlabel} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{True: }\PY{l+s+si}{\PYZob{}0\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{cls\PYZus{}true}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+                \PY{k}{else}\PY{p}{:}
+                    \PY{n}{xlabel} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{True: }\PY{l+s+si}{\PYZob{}0\PYZcb{}}\PY{l+s+s2}{, Pred: }\PY{l+s+si}{\PYZob{}1\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{cls\PYZus{}true}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{cls\PYZus{}pred}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+        
+                \PY{c+c1}{\PYZsh{} Show the classes as the label on the x\PYZhy{}axis.}
+                \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{n}{xlabel}\PY{p}{)}
+                
+                \PY{c+c1}{\PYZsh{} Remove ticks from the plot.}
+                \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xticks}\PY{p}{(}\PY{p}{[}\PY{p}{]}\PY{p}{)}
+                \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}yticks}\PY{p}{(}\PY{p}{[}\PY{p}{]}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{} Ensure the plot is shown correctly with multiple plots}
+            \PY{c+c1}{\PYZsh{} in a single Notebook cell.}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsubsection{Plot a few images to see if data is
+correct}\label{plot-a-few-images-to-see-if-data-is-correct}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{} Get some random images and their labels from the train set.}
+        
+        \PY{n}{images}\PY{p}{,} \PY{n}{cls\PYZus{}true}  \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{train}\PY{o}{.}\PY{n}{images}\PY{p}{,} \PY{n}{data}\PY{o}{.}\PY{n}{train}\PY{o}{.}\PY{n}{cls}
+        
+        \PY{c+c1}{\PYZsh{} Plot the images and labels using our helper\PYZhy{}function above.}
+        \PY{n}{plot\PYZus{}images}\PY{p}{(}\PY{n}{images}\PY{o}{=}\PY{n}{images}\PY{p}{,} \PY{n}{cls\PYZus{}true}\PY{o}{=}\PY{n}{cls\PYZus{}true}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_11_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{TensorFlow Graph}\label{tensorflow-graph}
+
+The entire purpose of TensorFlow is to have a so-called computational
+graph that can be executed much more efficiently than if the same
+calculations were to be performed directly in Python. TensorFlow can be
+more efficient than NumPy because TensorFlow knows the entire
+computation graph that must be executed, while NumPy only knows the
+computation of a single mathematical operation at a time.
+
+TensorFlow can also automatically calculate the gradients that are
+needed to optimize the variables of the graph so as to make the model
+perform better. This is because the graph is a combination of simple
+mathematical expressions so the gradient of the entire graph can be
+calculated using the chain-rule for derivatives.
+
+A TensorFlow graph consists of the following parts which will be
+detailed below:
+
+\begin{itemize}
+\tightlist
+\item
+  Placeholder variables used for inputting data to the graph.
+\item
+  Variables that are going to be optimized so as to make the
+  convolutional network perform better.
+\item
+  The mathematical formulas for the convolutional network.
+\item
+  A cost measure that can be used to guide the optimization of the
+  variables.
+\item
+  An optimization method which updates the variables.
+\end{itemize}
+
+    \subsubsection{Helper-functions for creating new
+variables}\label{helper-functions-for-creating-new-variables}
+
+    Functions for creating new TensorFlow variables in the given shape and
+initializing them with random values. Note that the initialization is
+not actually done at this point, it is merely being defined in the
+TensorFlow graph.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{k}{def} \PY{n+nf}{new\PYZus{}weights}\PY{p}{(}\PY{n}{shape}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{n}{tf}\PY{o}{.}\PY{n}{Variable}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{truncated\PYZus{}normal}\PY{p}{(}\PY{n}{shape}\PY{p}{,} \PY{n}{stddev}\PY{o}{=}\PY{l+m+mf}{0.05}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{k}{def} \PY{n+nf}{new\PYZus{}biases}\PY{p}{(}\PY{n}{length}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{n}{tf}\PY{o}{.}\PY{n}{Variable}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{constant}\PY{p}{(}\PY{l+m+mf}{0.05}\PY{p}{,} \PY{n}{shape}\PY{o}{=}\PY{p}{[}\PY{n}{length}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsubsection{Helper-function for creating a new Convolutional
+Layer}\label{helper-function-for-creating-a-new-convolutional-layer}
+
+    This function creates a new convolutional layer in the computational
+graph for TensorFlow. Nothing is actually calculated here, we are just
+adding the mathematical formulas to the TensorFlow graph.
+
+It is assumed that the input is a 4-dim tensor with the following
+dimensions:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Image number.
+\item
+  Y-axis of each image.
+\item
+  X-axis of each image.
+\item
+  Channels of each image.
+\end{enumerate}
+
+Note that the input channels may either be colour-channels, or it may be
+filter-channels if the input is produced from a previous convolutional
+layer.
+
+The output is another 4-dim tensor with the following dimensions:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Image number, same as input.
+\item
+  Y-axis of each image. If 2x2 pooling is used, then the height and
+  width of the input images is divided by 2.
+\item
+  X-axis of each image. Ditto.
+\item
+  Channels produced by the convolutional filters.
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{k}{def} \PY{n+nf}{new\PYZus{}conv\PYZus{}layer}\PY{p}{(}\PY{n+nb}{input}\PY{p}{,}              \PY{c+c1}{\PYZsh{} The previous layer.}
+                           \PY{n}{num\PYZus{}input\PYZus{}channels}\PY{p}{,} \PY{c+c1}{\PYZsh{} Num. channels in prev. layer.}
+                           \PY{n}{filter\PYZus{}size}\PY{p}{,}        \PY{c+c1}{\PYZsh{} Width and height of each filter.}
+                           \PY{n}{num\PYZus{}filters}\PY{p}{,}        \PY{c+c1}{\PYZsh{} Number of filters.}
+                           \PY{n}{use\PYZus{}pooling}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}\PY{p}{:}  \PY{c+c1}{\PYZsh{} Use 2x2 max\PYZhy{}pooling.}
+        
+            \PY{c+c1}{\PYZsh{} Shape of the filter\PYZhy{}weights for the convolution.}
+            \PY{c+c1}{\PYZsh{} This format is determined by the TensorFlow API.}
+            \PY{n}{shape} \PY{o}{=} \PY{p}{[}\PY{n}{filter\PYZus{}size}\PY{p}{,} \PY{n}{filter\PYZus{}size}\PY{p}{,} \PY{n}{num\PYZus{}input\PYZus{}channels}\PY{p}{,} \PY{n}{num\PYZus{}filters}\PY{p}{]}
+        
+            \PY{c+c1}{\PYZsh{} Create new weights aka. filters with the given shape.}
+            \PY{n}{weights} \PY{o}{=} \PY{n}{new\PYZus{}weights}\PY{p}{(}\PY{n}{shape}\PY{o}{=}\PY{n}{shape}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} Create new biases, one for each filter.}
+            \PY{n}{biases} \PY{o}{=} \PY{n}{new\PYZus{}biases}\PY{p}{(}\PY{n}{length}\PY{o}{=}\PY{n}{num\PYZus{}filters}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} Create the TensorFlow operation for convolution.}
+            \PY{c+c1}{\PYZsh{} Note the strides are set to 1 in all dimensions.}
+            \PY{c+c1}{\PYZsh{} The first and last stride must always be 1,}
+            \PY{c+c1}{\PYZsh{} because the first is for the image\PYZhy{}number and}
+            \PY{c+c1}{\PYZsh{} the last is for the input\PYZhy{}channel.}
+            \PY{c+c1}{\PYZsh{} But e.g. strides=[1, 2, 2, 1] would mean that the filter}
+            \PY{c+c1}{\PYZsh{} is moved 2 pixels across the x\PYZhy{} and y\PYZhy{}axis of the image.}
+            \PY{c+c1}{\PYZsh{} The padding is set to \PYZsq{}SAME\PYZsq{} which means the input image}
+            \PY{c+c1}{\PYZsh{} is padded with zeroes so the size of the output is the same.}
+            \PY{n}{layer} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{nn}\PY{o}{.}\PY{n}{conv2d}\PY{p}{(}\PY{n+nb}{input}\PY{o}{=}\PY{n+nb}{input}\PY{p}{,}
+                                 \PY{n+nb}{filter}\PY{o}{=}\PY{n}{weights}\PY{p}{,}
+                                 \PY{n}{strides}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}
+                                 \PY{n}{padding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SAME}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} Add the biases to the results of the convolution.}
+            \PY{c+c1}{\PYZsh{} A bias\PYZhy{}value is added to each filter\PYZhy{}channel.}
+            \PY{n}{layer} \PY{o}{+}\PY{o}{=} \PY{n}{biases}
+        
+            \PY{c+c1}{\PYZsh{} Use pooling to down\PYZhy{}sample the image resolution?}
+            \PY{k}{if} \PY{n}{use\PYZus{}pooling}\PY{p}{:}
+                \PY{c+c1}{\PYZsh{} This is 2x2 max\PYZhy{}pooling, which means that we}
+                \PY{c+c1}{\PYZsh{} consider 2x2 windows and select the largest value}
+                \PY{c+c1}{\PYZsh{} in each window. Then we move 2 pixels to the next window.}
+                \PY{n}{layer} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{nn}\PY{o}{.}\PY{n}{max\PYZus{}pool}\PY{p}{(}\PY{n}{value}\PY{o}{=}\PY{n}{layer}\PY{p}{,}
+                                       \PY{n}{ksize}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}
+                                       \PY{n}{strides}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}
+                                       \PY{n}{padding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SAME}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} Rectified Linear Unit (ReLU).}
+            \PY{c+c1}{\PYZsh{} It calculates max(x, 0) for each input pixel x.}
+            \PY{c+c1}{\PYZsh{} This adds some non\PYZhy{}linearity to the formula and allows us}
+            \PY{c+c1}{\PYZsh{} to learn more complicated functions.}
+            \PY{n}{layer} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{nn}\PY{o}{.}\PY{n}{relu}\PY{p}{(}\PY{n}{layer}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} Note that ReLU is normally executed before the pooling,}
+            \PY{c+c1}{\PYZsh{} but since relu(max\PYZus{}pool(x)) == max\PYZus{}pool(relu(x)) we can}
+            \PY{c+c1}{\PYZsh{} save 75\PYZpc{} of the relu\PYZhy{}operations by max\PYZhy{}pooling first.}
+        
+            \PY{c+c1}{\PYZsh{} We return both the resulting layer and the filter\PYZhy{}weights}
+            \PY{c+c1}{\PYZsh{} because we will plot the weights later.}
+            \PY{k}{return} \PY{n}{layer}\PY{p}{,} \PY{n}{weights}
+\end{Verbatim}
+
+
+    \subsubsection{Helper-function for flattening a
+layer}\label{helper-function-for-flattening-a-layer}
+
+A convolutional layer produces an output tensor with 4 dimensions. We
+will add fully-connected layers after the convolution layers, so we need
+to reduce the 4-dim tensor to 2-dim which can be used as input to the
+fully-connected layer.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{k}{def} \PY{n+nf}{flatten\PYZus{}layer}\PY{p}{(}\PY{n}{layer}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} Get the shape of the input layer.}
+             \PY{n}{layer\PYZus{}shape} \PY{o}{=} \PY{n}{layer}\PY{o}{.}\PY{n}{get\PYZus{}shape}\PY{p}{(}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} The shape of the input layer is assumed to be:}
+             \PY{c+c1}{\PYZsh{} layer\PYZus{}shape == [num\PYZus{}images, img\PYZus{}height, img\PYZus{}width, num\PYZus{}channels]}
+         
+             \PY{c+c1}{\PYZsh{} The number of features is: img\PYZus{}height * img\PYZus{}width * num\PYZus{}channels}
+             \PY{c+c1}{\PYZsh{} We can use a function from TensorFlow to calculate this.}
+             \PY{n}{num\PYZus{}features} \PY{o}{=} \PY{n}{layer\PYZus{}shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{l+m+mi}{4}\PY{p}{]}\PY{o}{.}\PY{n}{num\PYZus{}elements}\PY{p}{(}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} Reshape the layer to [num\PYZus{}images, num\PYZus{}features].}
+             \PY{c+c1}{\PYZsh{} Note that we just set the size of the second dimension}
+             \PY{c+c1}{\PYZsh{} to num\PYZus{}features and the size of the first dimension to \PYZhy{}1}
+             \PY{c+c1}{\PYZsh{} which means the size in that dimension is calculated}
+             \PY{c+c1}{\PYZsh{} so the total size of the tensor is unchanged from the reshaping.}
+             \PY{n}{layer\PYZus{}flat} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{layer}\PY{p}{,} \PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{num\PYZus{}features}\PY{p}{]}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} The shape of the flattened layer is now:}
+             \PY{c+c1}{\PYZsh{} [num\PYZus{}images, img\PYZus{}height * img\PYZus{}width * num\PYZus{}channels]}
+         
+             \PY{c+c1}{\PYZsh{} Return both the flattened layer and the number of features.}
+             \PY{k}{return} \PY{n}{layer\PYZus{}flat}\PY{p}{,} \PY{n}{num\PYZus{}features}
+\end{Verbatim}
+
+
+    \subsubsection{Helper-function for creating a new Fully-Connected
+Layer}\label{helper-function-for-creating-a-new-fully-connected-layer}
+
+    This function creates a new fully-connected layer in the computational
+graph for TensorFlow. Nothing is actually calculated here, we are just
+adding the mathematical formulas to the TensorFlow graph.
+
+It is assumed that the input is a 2-dim tensor of shape
+\texttt{{[}num\_images,\ num\_inputs{]}}. The output is a 2-dim tensor
+of shape \texttt{{[}num\_images,\ num\_outputs{]}}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{k}{def} \PY{n+nf}{new\PYZus{}fc\PYZus{}layer}\PY{p}{(}\PY{n+nb}{input}\PY{p}{,}          \PY{c+c1}{\PYZsh{} The previous layer.}
+                          \PY{n}{num\PYZus{}inputs}\PY{p}{,}     \PY{c+c1}{\PYZsh{} Num. inputs from prev. layer.}
+                          \PY{n}{num\PYZus{}outputs}\PY{p}{,}    \PY{c+c1}{\PYZsh{} Num. outputs.}
+                          \PY{n}{use\PYZus{}relu}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}\PY{p}{:} \PY{c+c1}{\PYZsh{} Use Rectified Linear Unit (ReLU)?}
+         
+             \PY{c+c1}{\PYZsh{} Create new weights and biases.}
+             \PY{n}{weights} \PY{o}{=} \PY{n}{new\PYZus{}weights}\PY{p}{(}\PY{n}{shape}\PY{o}{=}\PY{p}{[}\PY{n}{num\PYZus{}inputs}\PY{p}{,} \PY{n}{num\PYZus{}outputs}\PY{p}{]}\PY{p}{)}
+             \PY{n}{biases} \PY{o}{=} \PY{n}{new\PYZus{}biases}\PY{p}{(}\PY{n}{length}\PY{o}{=}\PY{n}{num\PYZus{}outputs}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} Calculate the layer as the matrix multiplication of}
+             \PY{c+c1}{\PYZsh{} the input and weights, and then add the bias\PYZhy{}values.}
+             \PY{n}{layer} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{matmul}\PY{p}{(}\PY{n+nb}{input}\PY{p}{,} \PY{n}{weights}\PY{p}{)} \PY{o}{+} \PY{n}{biases}
+         
+             \PY{c+c1}{\PYZsh{} Use ReLU?}
+             \PY{k}{if} \PY{n}{use\PYZus{}relu}\PY{p}{:}
+                 \PY{n}{layer} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{nn}\PY{o}{.}\PY{n}{relu}\PY{p}{(}\PY{n}{layer}\PY{p}{)}
+         
+             \PY{k}{return} \PY{n}{layer}
+\end{Verbatim}
+
+
+    \subsubsection{Placeholder variables}\label{placeholder-variables}
+
+    Placeholder variables serve as the input to the TensorFlow computational
+graph that we may change each time we execute the graph. We call this
+feeding the placeholder variables and it is demonstrated further below.
+
+First we define the placeholder variable for the input images. This
+allows us to change the images that are input to the TensorFlow graph.
+This is a so-called tensor, which just means that it is a
+multi-dimensional vector or matrix. The data-type is set to
+\texttt{float32} and the shape is set to
+\texttt{{[}None,\ img\_size\_flat{]}}, where \texttt{None} means that
+the tensor may hold an arbitrary number of images with each image being
+a vector of length \texttt{img\_size\_flat}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{x} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{placeholder}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{float32}\PY{p}{,} \PY{n}{shape}\PY{o}{=}\PY{p}{[}\PY{k+kc}{None}\PY{p}{,} \PY{n}{img\PYZus{}size\PYZus{}flat}\PY{p}{]}\PY{p}{,} \PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    The convolutional layers expect \texttt{x} to be encoded as a 4-dim
+tensor so we have to reshape it so its shape is instead
+\texttt{{[}num\_images,\ img\_height,\ img\_width,\ num\_channels{]}}.
+Note that \texttt{img\_height\ ==\ img\_width\ ==\ img\_size} and
+\texttt{num\_images} can be inferred automatically by using -1 for the
+size of the first dimension. So the reshape operation is:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{x\PYZus{}image} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{img\PYZus{}size}\PY{p}{,} \PY{n}{img\PYZus{}size}\PY{p}{,} \PY{n}{num\PYZus{}channels}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    Next we have the placeholder variable for the true labels associated
+with the images that were input in the placeholder variable \texttt{x}.
+The shape of this placeholder variable is
+\texttt{{[}None,\ num\_classes{]}} which means it may hold an arbitrary
+number of labels and each label is a vector of length
+\texttt{num\_classes}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{y\PYZus{}true} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{placeholder}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{float32}\PY{p}{,} \PY{n}{shape}\PY{o}{=}\PY{p}{[}\PY{k+kc}{None}\PY{p}{,} \PY{n}{num\PYZus{}classes}\PY{p}{]}\PY{p}{,} \PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y\PYZus{}true}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    We could also have a placeholder variable for the class-number, but we
+will instead calculate it using argmax. Note that this is a TensorFlow
+operator so nothing is calculated at this point.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{y\PYZus{}true\PYZus{}cls} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{y\PYZus{}true}\PY{p}{,} \PY{n}{dimension}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+WARNING:tensorflow:From <ipython-input-15-71ccadb4572d>:1: calling argmax (from tensorflow.python.ops.math\_ops) with dimension is deprecated and will be removed in a future version.
+Instructions for updating:
+Use the `axis` argument instead
+
+    \end{Verbatim}
+
+    \subsubsection{Convolutional Layer 1}\label{convolutional-layer-1}
+
+Create the first convolutional layer. It takes \texttt{x\_image} as
+input and creates \texttt{num\_filters1} different filters, each having
+width and height equal to \texttt{filter\_size1}. Finally we wish to
+down-sample the image so it is half the size by using 2x2 max-pooling.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{layer\PYZus{}conv1}\PY{p}{,} \PY{n}{weights\PYZus{}conv1} \PY{o}{=} \PYZbs{}
+             \PY{n}{new\PYZus{}conv\PYZus{}layer}\PY{p}{(}\PY{n+nb}{input}\PY{o}{=}\PY{n}{x\PYZus{}image}\PY{p}{,}
+                            \PY{n}{num\PYZus{}input\PYZus{}channels}\PY{o}{=}\PY{n}{num\PYZus{}channels}\PY{p}{,}
+                            \PY{n}{filter\PYZus{}size}\PY{o}{=}\PY{n}{filter\PYZus{}size1}\PY{p}{,}
+                            \PY{n}{num\PYZus{}filters}\PY{o}{=}\PY{n}{num\PYZus{}filters1}\PY{p}{,}
+                            \PY{n}{use\PYZus{}pooling}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{layer\PYZus{}conv1}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}17}]:} <tf.Tensor 'Relu:0' shape=(?, 64, 64, 32) dtype=float32>
+\end{Verbatim}
+            
+    \subsubsection{Convolutional Layers 2 and
+3}\label{convolutional-layers-2-and-3}
+
+Create the second and third convolutional layers, which take as input
+the output from the first and second convolutional layer respectively.
+The number of input channels corresponds to the number of filters in the
+previous convolutional layer.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{layer\PYZus{}conv2}\PY{p}{,} \PY{n}{weights\PYZus{}conv2} \PY{o}{=} \PYZbs{}
+             \PY{n}{new\PYZus{}conv\PYZus{}layer}\PY{p}{(}\PY{n+nb}{input}\PY{o}{=}\PY{n}{layer\PYZus{}conv1}\PY{p}{,}
+                            \PY{n}{num\PYZus{}input\PYZus{}channels}\PY{o}{=}\PY{n}{num\PYZus{}filters1}\PY{p}{,}
+                            \PY{n}{filter\PYZus{}size}\PY{o}{=}\PY{n}{filter\PYZus{}size2}\PY{p}{,}
+                            \PY{n}{num\PYZus{}filters}\PY{o}{=}\PY{n}{num\PYZus{}filters2}\PY{p}{,}
+                            \PY{n}{use\PYZus{}pooling}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n}{layer\PYZus{}conv2}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}19}]:} <tf.Tensor 'Relu\_1:0' shape=(?, 32, 32, 32) dtype=float32>
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{layer\PYZus{}conv3}\PY{p}{,} \PY{n}{weights\PYZus{}conv3} \PY{o}{=} \PYZbs{}
+             \PY{n}{new\PYZus{}conv\PYZus{}layer}\PY{p}{(}\PY{n+nb}{input}\PY{o}{=}\PY{n}{layer\PYZus{}conv2}\PY{p}{,}
+                            \PY{n}{num\PYZus{}input\PYZus{}channels}\PY{o}{=}\PY{n}{num\PYZus{}filters2}\PY{p}{,}
+                            \PY{n}{filter\PYZus{}size}\PY{o}{=}\PY{n}{filter\PYZus{}size3}\PY{p}{,}
+                            \PY{n}{num\PYZus{}filters}\PY{o}{=}\PY{n}{num\PYZus{}filters3}\PY{p}{,}
+                            \PY{n}{use\PYZus{}pooling}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{layer\PYZus{}conv3}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}21}]:} <tf.Tensor 'Relu\_2:0' shape=(?, 16, 16, 64) dtype=float32>
+\end{Verbatim}
+            
+    \subsubsection{Flatten Layer}\label{flatten-layer}
+
+The convolutional layers output 4-dim tensors. We now wish to use these
+as input in a fully-connected network, which requires for the tensors to
+be reshaped or flattened to 2-dim tensors.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{n}{layer\PYZus{}flat}\PY{p}{,} \PY{n}{num\PYZus{}features} \PY{o}{=} \PY{n}{flatten\PYZus{}layer}\PY{p}{(}\PY{n}{layer\PYZus{}conv3}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{n}{layer\PYZus{}flat}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}23}]:} <tf.Tensor 'Reshape\_1:0' shape=(?, 16384) dtype=float32>
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n}{num\PYZus{}features}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}24}]:} 16384
+\end{Verbatim}
+            
+    \subsubsection{Fully-Connected Layer 1}\label{fully-connected-layer-1}
+
+Add a fully-connected layer to the network. The input is the flattened
+layer from the previous convolution. The number of neurons or nodes in
+the fully-connected layer is \texttt{fc\_size}. ReLU is used so we can
+learn non-linear relations.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{n}{layer\PYZus{}fc1} \PY{o}{=} \PY{n}{new\PYZus{}fc\PYZus{}layer}\PY{p}{(}\PY{n+nb}{input}\PY{o}{=}\PY{n}{layer\PYZus{}flat}\PY{p}{,}
+                                  \PY{n}{num\PYZus{}inputs}\PY{o}{=}\PY{n}{num\PYZus{}features}\PY{p}{,}
+                                  \PY{n}{num\PYZus{}outputs}\PY{o}{=}\PY{n}{fc\PYZus{}size}\PY{p}{,}
+                                  \PY{n}{use\PYZus{}relu}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    Check that the output of the fully-connected layer is a tensor with
+shape (?, 128) where the ? means there is an arbitrary number of images
+and \texttt{fc\_size} == 128.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{n}{layer\PYZus{}fc1}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}26}]:} <tf.Tensor 'Relu\_3:0' shape=(?, 128) dtype=float32>
+\end{Verbatim}
+            
+    \subsubsection{Fully-Connected Layer 2}\label{fully-connected-layer-2}
+
+Add another fully-connected layer that outputs vectors of length
+num\_classes for determining which of the classes the input image
+belongs to. Note that ReLU is not used in this layer.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{n}{layer\PYZus{}fc2} \PY{o}{=} \PY{n}{new\PYZus{}fc\PYZus{}layer}\PY{p}{(}\PY{n+nb}{input}\PY{o}{=}\PY{n}{layer\PYZus{}fc1}\PY{p}{,}
+                                  \PY{n}{num\PYZus{}inputs}\PY{o}{=}\PY{n}{fc\PYZus{}size}\PY{p}{,}
+                                  \PY{n}{num\PYZus{}outputs}\PY{o}{=}\PY{n}{num\PYZus{}classes}\PY{p}{,}
+                                  \PY{n}{use\PYZus{}relu}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{n}{layer\PYZus{}fc2}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}28}]:} <tf.Tensor 'add\_4:0' shape=(?, 2) dtype=float32>
+\end{Verbatim}
+            
+    \subsubsection{Predicted Class}\label{predicted-class}
+
+    The second fully-connected layer estimates how likely it is that the
+input image belongs to each of the 2 classes. However, these estimates
+are a bit rough and difficult to interpret because the numbers may be
+very small or large, so we want to normalize them so that each element
+is limited between zero and one and the all the elements sum to one.
+This is calculated using the so-called softmax function and the result
+is stored in \texttt{y\_pred}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{n}{y\PYZus{}pred} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{nn}\PY{o}{.}\PY{n}{softmax}\PY{p}{(}\PY{n}{layer\PYZus{}fc2}\PY{p}{)}
+\end{Verbatim}
+
+
+    The class-number is the index of the largest element.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{n}{y\PYZus{}pred\PYZus{}cls} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{y\PYZus{}pred}\PY{p}{,} \PY{n}{dimension}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsubsection{Cost-function to be
+optimized}\label{cost-function-to-be-optimized}
+
+    To make the model better at classifying the input images, we must
+somehow change the variables for all the network layers. To do this we
+first need to know how well the model currently performs by comparing
+the predicted output of the model \texttt{y\_pred} to the desired output
+\texttt{y\_true}.
+
+The cross-entropy is a performance measure used in classification. The
+cross-entropy is a continuous function that is always positive and if
+the predicted output of the model exactly matches the desired output
+then the cross-entropy equals zero. The goal of optimization is
+therefore to minimize the cross-entropy so it gets as close to zero as
+possible by changing the variables of the network layers.
+
+TensorFlow has a built-in function for calculating the cross-entropy.
+Note that the function calculates the softmax internally so we must use
+the output of \texttt{layer\_fc2} directly rather than \texttt{y\_pred}
+which has already had the softmax applied.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{n}{cross\PYZus{}entropy} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{nn}\PY{o}{.}\PY{n}{softmax\PYZus{}cross\PYZus{}entropy\PYZus{}with\PYZus{}logits}\PY{p}{(}\PY{n}{logits}\PY{o}{=}\PY{n}{layer\PYZus{}fc2}\PY{p}{,}
+                                                                 \PY{n}{labels}\PY{o}{=}\PY{n}{y\PYZus{}true}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+WARNING:tensorflow:From <ipython-input-31-2dd067a7547b>:2: softmax\_cross\_entropy\_with\_logits (from tensorflow.python.ops.nn\_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+
+Future major versions of TensorFlow will allow gradients to flow
+into the labels input on backprop by default.
+
+See @\{tf.nn.softmax\_cross\_entropy\_with\_logits\_v2\}.
+
+
+    \end{Verbatim}
+
+    We have now calculated the cross-entropy for each of the image
+classifications so we have a measure of how well the model performs on
+each image individually. But in order to use the cross-entropy to guide
+the optimization of the model's variables we need a single scalar value,
+so we simply take the average of the cross-entropy for all the image
+classifications.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{n}{cost} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{reduce\PYZus{}mean}\PY{p}{(}\PY{n}{cross\PYZus{}entropy}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsubsection{Optimization Method}\label{optimization-method}
+
+    Now that we have a cost measure that must be minimized, we can then
+create an optimizer. In this case it is the \texttt{AdamOptimizer} which
+is an advanced form of Gradient Descent.
+
+Note that optimization is not performed at this point. In fact, nothing
+is calculated at all, we just add the optimizer-object to the TensorFlow
+graph for later execution.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{n}{optimizer} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{train}\PY{o}{.}\PY{n}{AdamOptimizer}\PY{p}{(}\PY{n}{learning\PYZus{}rate}\PY{o}{=}\PY{l+m+mf}{1e\PYZhy{}4}\PY{p}{)}\PY{o}{.}\PY{n}{minimize}\PY{p}{(}\PY{n}{cost}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsubsection{Performance Measures}\label{performance-measures}
+
+    We need a few more performance measures to display the progress to the
+user.
+
+This is a vector of booleans whether the predicted class equals the true
+class of each image.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{n}{correct\PYZus{}prediction} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{equal}\PY{p}{(}\PY{n}{y\PYZus{}pred\PYZus{}cls}\PY{p}{,} \PY{n}{y\PYZus{}true\PYZus{}cls}\PY{p}{)}
+\end{Verbatim}
+
+
+    This calculates the classification accuracy by first type-casting the
+vector of booleans to floats, so that False becomes 0 and True becomes
+1, and then calculating the average of these numbers.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{n}{accuracy} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{reduce\PYZus{}mean}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{cast}\PY{p}{(}\PY{n}{correct\PYZus{}prediction}\PY{p}{,} \PY{n}{tf}\PY{o}{.}\PY{n}{float32}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsection{TensorFlow Run}\label{tensorflow-run}
+
+    \subsubsection{Create TensorFlow
+session}\label{create-tensorflow-session}
+
+Once the TensorFlow graph has been created, we have to create a
+TensorFlow session which is used to execute the graph.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{n}{session} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{Session}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsubsection{Initialize variables}\label{initialize-variables}
+
+The variables for \texttt{weights} and \texttt{biases} must be
+initialized before we start optimizing them.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{n}{session}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{initialize\PYZus{}all\PYZus{}variables}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+WARNING:tensorflow:From C:\textbackslash{}Users\textbackslash{}ameypawar\textbackslash{}Anaconda2\textbackslash{}envs\textbackslash{}python3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}tensorflow\textbackslash{}python\textbackslash{}util\textbackslash{}tf\_should\_use.py:118: initialize\_all\_variables (from tensorflow.python.ops.variables) is deprecated and will be removed after 2017-03-02.
+Instructions for updating:
+Use `tf.global\_variables\_initializer` instead.
+
+    \end{Verbatim}
+
+    \subsubsection{Helper-function to perform optimization
+iterations}\label{helper-function-to-perform-optimization-iterations}
+
+    It takes a long time to calculate the gradient of the model using the
+entirety of a large dataset . We therefore only use a small batch of
+images in each iteration of the optimizer.
+
+If your computer crashes or becomes very slow because you run out of
+RAM, then you may try and lower this number, but you may then need to
+perform more optimization iterations.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{n}{train\PYZus{}batch\PYZus{}size} \PY{o}{=} \PY{n}{batch\PYZus{}size}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{k}{def} \PY{n+nf}{print\PYZus{}progress}\PY{p}{(}\PY{n}{epoch}\PY{p}{,} \PY{n}{feed\PYZus{}dict\PYZus{}train}\PY{p}{,} \PY{n}{feed\PYZus{}dict\PYZus{}validate}\PY{p}{,} \PY{n}{val\PYZus{}loss}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} Calculate the accuracy on the training\PYZhy{}set.}
+             \PY{n}{acc} \PY{o}{=} \PY{n}{session}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{n}{accuracy}\PY{p}{,} \PY{n}{feed\PYZus{}dict}\PY{o}{=}\PY{n}{feed\PYZus{}dict\PYZus{}train}\PY{p}{)}
+             \PY{n}{val\PYZus{}acc} \PY{o}{=} \PY{n}{session}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{n}{accuracy}\PY{p}{,} \PY{n}{feed\PYZus{}dict}\PY{o}{=}\PY{n}{feed\PYZus{}dict\PYZus{}validate}\PY{p}{)}
+             \PY{n}{msg} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Epoch }\PY{l+s+si}{\PYZob{}0\PYZcb{}}\PY{l+s+s2}{ \PYZhy{}\PYZhy{}\PYZhy{} Training Accuracy: }\PY{l+s+si}{\PYZob{}1:\PYZgt{}6.1\PYZpc{}\PYZcb{}}\PY{l+s+s2}{, Validation Accuracy: }\PY{l+s+si}{\PYZob{}2:\PYZgt{}6.1\PYZpc{}\PYZcb{}}\PY{l+s+s2}{, Validation Loss: }\PY{l+s+si}{\PYZob{}3:.3f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{msg}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{epoch} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{acc}\PY{p}{,} \PY{n}{val\PYZus{}acc}\PY{p}{,} \PY{n}{val\PYZus{}loss}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    Function for performing a number of optimization iterations so as to
+gradually improve the variables of the network layers. In each
+iteration, a new batch of data is selected from the training-set and
+then TensorFlow executes the optimizer using those training samples. The
+progress is printed every 100 iterations.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{c+c1}{\PYZsh{} Counter for total number of iterations performed so far.}
+         \PY{n}{total\PYZus{}iterations} \PY{o}{=} \PY{l+m+mi}{0}
+         
+         \PY{k}{def} \PY{n+nf}{optimize}\PY{p}{(}\PY{n}{num\PYZus{}iterations}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} Ensure we update the global variable rather than a local copy.}
+             \PY{k}{global} \PY{n}{total\PYZus{}iterations}
+         
+             \PY{c+c1}{\PYZsh{} Start\PYZhy{}time used for printing time\PYZhy{}usage below.}
+             \PY{n}{start\PYZus{}time} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)}
+             
+             \PY{n}{best\PYZus{}val\PYZus{}loss} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{inf}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n}{patience} \PY{o}{=} \PY{l+m+mi}{0}
+         
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{total\PYZus{}iterations}\PY{p}{,}
+                            \PY{n}{total\PYZus{}iterations} \PY{o}{+} \PY{n}{num\PYZus{}iterations}\PY{p}{)}\PY{p}{:}
+         
+                 \PY{c+c1}{\PYZsh{} Get a batch of training examples.}
+                 \PY{c+c1}{\PYZsh{} x\PYZus{}batch now holds a batch of images and}
+                 \PY{c+c1}{\PYZsh{} y\PYZus{}true\PYZus{}batch are the true labels for those images.}
+                 \PY{n}{x\PYZus{}batch}\PY{p}{,} \PY{n}{y\PYZus{}true\PYZus{}batch}\PY{p}{,} \PY{n}{\PYZus{}}\PY{p}{,} \PY{n}{cls\PYZus{}batch} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{train}\PY{o}{.}\PY{n}{next\PYZus{}batch}\PY{p}{(}\PY{n}{train\PYZus{}batch\PYZus{}size}\PY{p}{)}
+                 \PY{n}{x\PYZus{}valid\PYZus{}batch}\PY{p}{,} \PY{n}{y\PYZus{}valid\PYZus{}batch}\PY{p}{,} \PY{n}{\PYZus{}}\PY{p}{,} \PY{n}{valid\PYZus{}cls\PYZus{}batch} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{valid}\PY{o}{.}\PY{n}{next\PYZus{}batch}\PY{p}{(}\PY{n}{train\PYZus{}batch\PYZus{}size}\PY{p}{)}
+         
+                 \PY{c+c1}{\PYZsh{} Convert shape from [num examples, rows, columns, depth]}
+                 \PY{c+c1}{\PYZsh{} to [num examples, flattened image shape]}
+         
+                 \PY{n}{x\PYZus{}batch} \PY{o}{=} \PY{n}{x\PYZus{}batch}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{train\PYZus{}batch\PYZus{}size}\PY{p}{,} \PY{n}{img\PYZus{}size\PYZus{}flat}\PY{p}{)}
+                 \PY{n}{x\PYZus{}valid\PYZus{}batch} \PY{o}{=} \PY{n}{x\PYZus{}valid\PYZus{}batch}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{train\PYZus{}batch\PYZus{}size}\PY{p}{,} \PY{n}{img\PYZus{}size\PYZus{}flat}\PY{p}{)}
+         
+                 \PY{c+c1}{\PYZsh{} Put the batch into a dict with the proper names}
+                 \PY{c+c1}{\PYZsh{} for placeholder variables in the TensorFlow graph.}
+                 \PY{n}{feed\PYZus{}dict\PYZus{}train} \PY{o}{=} \PY{p}{\PYZob{}}\PY{n}{x}\PY{p}{:} \PY{n}{x\PYZus{}batch}\PY{p}{,}
+                                    \PY{n}{y\PYZus{}true}\PY{p}{:} \PY{n}{y\PYZus{}true\PYZus{}batch}\PY{p}{\PYZcb{}}
+                 
+                 \PY{n}{feed\PYZus{}dict\PYZus{}validate} \PY{o}{=} \PY{p}{\PYZob{}}\PY{n}{x}\PY{p}{:} \PY{n}{x\PYZus{}valid\PYZus{}batch}\PY{p}{,}
+                                       \PY{n}{y\PYZus{}true}\PY{p}{:} \PY{n}{y\PYZus{}valid\PYZus{}batch}\PY{p}{\PYZcb{}}
+         
+                 \PY{c+c1}{\PYZsh{} Run the optimizer using this batch of training data.}
+                 \PY{c+c1}{\PYZsh{} TensorFlow assigns the variables in feed\PYZus{}dict\PYZus{}train}
+                 \PY{c+c1}{\PYZsh{} to the placeholder variables and then runs the optimizer.}
+                 \PY{n}{session}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{n}{optimizer}\PY{p}{,} \PY{n}{feed\PYZus{}dict}\PY{o}{=}\PY{n}{feed\PYZus{}dict\PYZus{}train}\PY{p}{)}
+                 
+         
+                 \PY{c+c1}{\PYZsh{} Print status at end of each epoch (defined as full pass through training dataset).}
+                 \PY{k}{if} \PY{n}{i} \PY{o}{\PYZpc{}} \PY{n+nb}{int}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{train}\PY{o}{.}\PY{n}{num\PYZus{}examples}\PY{o}{/}\PY{n}{batch\PYZus{}size}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:} 
+                     \PY{n}{val\PYZus{}loss} \PY{o}{=} \PY{n}{session}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{n}{cost}\PY{p}{,} \PY{n}{feed\PYZus{}dict}\PY{o}{=}\PY{n}{feed\PYZus{}dict\PYZus{}validate}\PY{p}{)}
+                     \PY{n}{epoch} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{i} \PY{o}{/} \PY{n+nb}{int}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{train}\PY{o}{.}\PY{n}{num\PYZus{}examples}\PY{o}{/}\PY{n}{batch\PYZus{}size}\PY{p}{)}\PY{p}{)}
+                     
+                     \PY{n}{print\PYZus{}progress}\PY{p}{(}\PY{n}{epoch}\PY{p}{,} \PY{n}{feed\PYZus{}dict\PYZus{}train}\PY{p}{,} \PY{n}{feed\PYZus{}dict\PYZus{}validate}\PY{p}{,} \PY{n}{val\PYZus{}loss}\PY{p}{)}
+                     
+                     \PY{k}{if} \PY{n}{early\PYZus{}stopping}\PY{p}{:}    
+                         \PY{k}{if} \PY{n}{val\PYZus{}loss} \PY{o}{\PYZlt{}} \PY{n}{best\PYZus{}val\PYZus{}loss}\PY{p}{:}
+                             \PY{n}{best\PYZus{}val\PYZus{}loss} \PY{o}{=} \PY{n}{val\PYZus{}loss}
+                             \PY{n}{patience} \PY{o}{=} \PY{l+m+mi}{0}
+                         \PY{k}{else}\PY{p}{:}
+                             \PY{n}{patience} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+         
+                         \PY{k}{if} \PY{n}{patience} \PY{o}{==} \PY{n}{early\PYZus{}stopping}\PY{p}{:}
+                             \PY{k}{break}
+         
+             \PY{c+c1}{\PYZsh{} Update the total number of iterations performed.}
+             \PY{n}{total\PYZus{}iterations} \PY{o}{+}\PY{o}{=} \PY{n}{num\PYZus{}iterations}
+         
+             \PY{c+c1}{\PYZsh{} Ending time.}
+             \PY{n}{end\PYZus{}time} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} Difference between start and end\PYZhy{}times.}
+             \PY{n}{time\PYZus{}dif} \PY{o}{=} \PY{n}{end\PYZus{}time} \PY{o}{\PYZhy{}} \PY{n}{start\PYZus{}time}
+         
+             \PY{c+c1}{\PYZsh{} Print the time\PYZhy{}usage.}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Time elapsed: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{timedelta}\PY{p}{(}\PY{n}{seconds}\PY{o}{=}\PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{round}\PY{p}{(}\PY{n}{time\PYZus{}dif}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsubsection{Helper-function to plot example
+errors}\label{helper-function-to-plot-example-errors}
+
+    Function for plotting examples of images from the test-set that have
+been mis-classified.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}41}]:} \PY{k}{def} \PY{n+nf}{plot\PYZus{}example\PYZus{}errors}\PY{p}{(}\PY{n}{cls\PYZus{}pred}\PY{p}{,} \PY{n}{correct}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} cls\PYZus{}pred is an array of the predicted class\PYZhy{}number for}
+             \PY{c+c1}{\PYZsh{} all images in the test\PYZhy{}set.}
+         
+             \PY{c+c1}{\PYZsh{} correct is a boolean array whether the predicted class}
+             \PY{c+c1}{\PYZsh{} is equal to the true class for each image in the test\PYZhy{}set.}
+         
+             \PY{c+c1}{\PYZsh{} Negate the boolean array.}
+             \PY{n}{incorrect} \PY{o}{=} \PY{p}{(}\PY{n}{correct} \PY{o}{==} \PY{k+kc}{False}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} Get the images from the test\PYZhy{}set that have been}
+             \PY{c+c1}{\PYZsh{} incorrectly classified.}
+             \PY{n}{images} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{valid}\PY{o}{.}\PY{n}{images}\PY{p}{[}\PY{n}{incorrect}\PY{p}{]}
+             
+             \PY{c+c1}{\PYZsh{} Get the predicted classes for those images.}
+             \PY{n}{cls\PYZus{}pred} \PY{o}{=} \PY{n}{cls\PYZus{}pred}\PY{p}{[}\PY{n}{incorrect}\PY{p}{]}
+         
+             \PY{c+c1}{\PYZsh{} Get the true classes for those images.}
+             \PY{n}{cls\PYZus{}true} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{valid}\PY{o}{.}\PY{n}{cls}\PY{p}{[}\PY{n}{incorrect}\PY{p}{]}
+             
+             \PY{c+c1}{\PYZsh{} Plot the first 9 images.}
+             \PY{n}{plot\PYZus{}images}\PY{p}{(}\PY{n}{images}\PY{o}{=}\PY{n}{images}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{9}\PY{p}{]}\PY{p}{,}
+                         \PY{n}{cls\PYZus{}true}\PY{o}{=}\PY{n}{cls\PYZus{}true}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{9}\PY{p}{]}\PY{p}{,}
+                         \PY{n}{cls\PYZus{}pred}\PY{o}{=}\PY{n}{cls\PYZus{}pred}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{9}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsubsection{Helper-function to plot confusion
+matrix}\label{helper-function-to-plot-confusion-matrix}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{k}{def} \PY{n+nf}{plot\PYZus{}confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{cls\PYZus{}pred}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} cls\PYZus{}pred is an array of the predicted class\PYZhy{}number for}
+             \PY{c+c1}{\PYZsh{} all images in the test\PYZhy{}set.}
+         
+             \PY{c+c1}{\PYZsh{} Get the true classifications for the test\PYZhy{}set.}
+             \PY{n}{cls\PYZus{}true} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{valid}\PY{o}{.}\PY{n}{cls}
+             
+             \PY{c+c1}{\PYZsh{} Get the confusion matrix using sklearn.}
+             \PY{n}{cm} \PY{o}{=} \PY{n}{confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{y\PYZus{}true}\PY{o}{=}\PY{n}{cls\PYZus{}true}\PY{p}{,}
+                                   \PY{n}{y\PYZus{}pred}\PY{o}{=}\PY{n}{cls\PYZus{}pred}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} Print the confusion matrix as text.}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{cm}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} Plot the confusion matrix as an image.}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{matshow}\PY{p}{(}\PY{n}{cm}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} Make various adjustments to the plot.}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{colorbar}\PY{p}{(}\PY{p}{)}
+             \PY{n}{tick\PYZus{}marks} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{num\PYZus{}classes}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{tick\PYZus{}marks}\PY{p}{,} \PY{n+nb}{range}\PY{p}{(}\PY{n}{num\PYZus{}classes}\PY{p}{)}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{yticks}\PY{p}{(}\PY{n}{tick\PYZus{}marks}\PY{p}{,} \PY{n+nb}{range}\PY{p}{(}\PY{n}{num\PYZus{}classes}\PY{p}{)}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Predicted}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{True}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} Ensure the plot is shown correctly with multiple plots}
+             \PY{c+c1}{\PYZsh{} in a single Notebook cell.}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsubsection{Helper-function for showing the
+performance}\label{helper-function-for-showing-the-performance}
+
+    Function for printing the classification accuracy on the test-set.
+
+It takes a while to compute the classification for all the images in the
+test-set, that's why the results are re-used by calling the above
+functions directly from this function, so the classifications don't have
+to be recalculated by each function.
+
+Note that this function can use a lot of computer memory, which is why
+the test-set is split into smaller batches. If you have little RAM in
+your computer and it crashes, then you can try and lower the batch-size.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}43}]:} \PY{k}{def} \PY{n+nf}{print\PYZus{}validation\PYZus{}accuracy}\PY{p}{(}\PY{n}{show\PYZus{}example\PYZus{}errors}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,}
+                                 \PY{n}{show\PYZus{}confusion\PYZus{}matrix}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{p}{:}
+         
+             \PY{c+c1}{\PYZsh{} Number of images in the test\PYZhy{}set.}
+             \PY{n}{num\PYZus{}test} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{valid}\PY{o}{.}\PY{n}{images}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} Allocate an array for the predicted classes which}
+             \PY{c+c1}{\PYZsh{} will be calculated in batches and filled into this array.}
+             \PY{n}{cls\PYZus{}pred} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{shape}\PY{o}{=}\PY{n}{num\PYZus{}test}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{int}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} Now calculate the predicted classes for the batches.}
+             \PY{c+c1}{\PYZsh{} We will just iterate through all the batches.}
+             \PY{c+c1}{\PYZsh{} There might be a more clever and Pythonic way of doing this.}
+         
+             \PY{c+c1}{\PYZsh{} The starting index for the next batch is denoted i.}
+             \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{0}
+         
+             \PY{k}{while} \PY{n}{i} \PY{o}{\PYZlt{}} \PY{n}{num\PYZus{}test}\PY{p}{:}
+                 \PY{c+c1}{\PYZsh{} The ending index for the next batch is denoted j.}
+                 \PY{n}{j} \PY{o}{=} \PY{n+nb}{min}\PY{p}{(}\PY{n}{i} \PY{o}{+} \PY{n}{batch\PYZus{}size}\PY{p}{,} \PY{n}{num\PYZus{}test}\PY{p}{)}
+         
+                 \PY{c+c1}{\PYZsh{} Get the images from the test\PYZhy{}set between index i and j.}
+                 \PY{n}{images} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{valid}\PY{o}{.}\PY{n}{images}\PY{p}{[}\PY{n}{i}\PY{p}{:}\PY{n}{j}\PY{p}{,} \PY{p}{:}\PY{p}{]}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{batch\PYZus{}size}\PY{p}{,} \PY{n}{img\PYZus{}size\PYZus{}flat}\PY{p}{)}
+                 
+         
+                 \PY{c+c1}{\PYZsh{} Get the associated labels.}
+                 \PY{n}{labels} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{valid}\PY{o}{.}\PY{n}{labels}\PY{p}{[}\PY{n}{i}\PY{p}{:}\PY{n}{j}\PY{p}{,} \PY{p}{:}\PY{p}{]}
+         
+                 \PY{c+c1}{\PYZsh{} Create a feed\PYZhy{}dict with these images and labels.}
+                 \PY{n}{feed\PYZus{}dict} \PY{o}{=} \PY{p}{\PYZob{}}\PY{n}{x}\PY{p}{:} \PY{n}{images}\PY{p}{,}
+                              \PY{n}{y\PYZus{}true}\PY{p}{:} \PY{n}{labels}\PY{p}{\PYZcb{}}
+         
+                 \PY{c+c1}{\PYZsh{} Calculate the predicted class using TensorFlow.}
+                 \PY{n}{cls\PYZus{}pred}\PY{p}{[}\PY{n}{i}\PY{p}{:}\PY{n}{j}\PY{p}{]} \PY{o}{=} \PY{n}{session}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{n}{y\PYZus{}pred\PYZus{}cls}\PY{p}{,} \PY{n}{feed\PYZus{}dict}\PY{o}{=}\PY{n}{feed\PYZus{}dict}\PY{p}{)}
+         
+                 \PY{c+c1}{\PYZsh{} Set the start\PYZhy{}index for the next batch to the}
+                 \PY{c+c1}{\PYZsh{} end\PYZhy{}index of the current batch.}
+                 \PY{n}{i} \PY{o}{=} \PY{n}{j}
+         
+             \PY{n}{cls\PYZus{}true} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{valid}\PY{o}{.}\PY{n}{cls}\PY{p}{)}
+             \PY{n}{cls\PYZus{}pred} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n}{classes}\PY{p}{[}\PY{n}{x}\PY{p}{]} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{cls\PYZus{}pred}\PY{p}{]}\PY{p}{)} 
+         
+             \PY{c+c1}{\PYZsh{} Create a boolean array whether each image is correctly classified.}
+             \PY{n}{correct} \PY{o}{=} \PY{p}{(}\PY{n}{cls\PYZus{}true} \PY{o}{==} \PY{n}{cls\PYZus{}pred}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} Calculate the number of correctly classified images.}
+             \PY{c+c1}{\PYZsh{} When summing a boolean array, False means 0 and True means 1.}
+             \PY{n}{correct\PYZus{}sum} \PY{o}{=} \PY{n}{correct}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} Classification accuracy is the number of correctly classified}
+             \PY{c+c1}{\PYZsh{} images divided by the total number of images in the test\PYZhy{}set.}
+             \PY{n}{acc} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n}{correct\PYZus{}sum}\PY{p}{)} \PY{o}{/} \PY{n}{num\PYZus{}test}
+         
+             \PY{c+c1}{\PYZsh{} Print the accuracy.}
+             \PY{n}{msg} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Accuracy on Test\PYZhy{}Set: }\PY{l+s+si}{\PYZob{}0:.1\PYZpc{}\PYZcb{}}\PY{l+s+s2}{ (}\PY{l+s+si}{\PYZob{}1\PYZcb{}}\PY{l+s+s2}{ / }\PY{l+s+si}{\PYZob{}2\PYZcb{}}\PY{l+s+s2}{)}\PY{l+s+s2}{\PYZdq{}}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{msg}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{acc}\PY{p}{,} \PY{n}{correct\PYZus{}sum}\PY{p}{,} \PY{n}{num\PYZus{}test}\PY{p}{)}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} Plot some examples of mis\PYZhy{}classifications, if desired.}
+             \PY{k}{if} \PY{n}{show\PYZus{}example\PYZus{}errors}\PY{p}{:}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Example errors:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                 \PY{n}{plot\PYZus{}example\PYZus{}errors}\PY{p}{(}\PY{n}{cls\PYZus{}pred}\PY{o}{=}\PY{n}{cls\PYZus{}pred}\PY{p}{,} \PY{n}{correct}\PY{o}{=}\PY{n}{correct}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} Plot the confusion matrix, if desired.}
+             \PY{k}{if} \PY{n}{show\PYZus{}confusion\PYZus{}matrix}\PY{p}{:}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Confusion Matrix:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                 \PY{n}{plot\PYZus{}confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{cls\PYZus{}pred}\PY{o}{=}\PY{n}{cls\PYZus{}pred}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsection{Performance after 1 optimization
+iteration}\label{performance-after-1-optimization-iteration}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} \PY{n}{optimize}\PY{p}{(}\PY{n}{num\PYZus{}iterations}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{print\PYZus{}validation\PYZus{}accuracy}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Epoch 1 --- Training Accuracy:  53.1\%, Validation Accuracy:  53.1\%, Validation Loss: 0.699
+Time elapsed: 0:00:04
+Accuracy on Test-Set: 49.6\% (1986 / 4000)
+
+    \end{Verbatim}
+
+    \subsection{Performance after 100 optimization
+iterations}\label{performance-after-100-optimization-iterations}
+
+After 100 optimization iterations, the model should have significantly
+improved its classification accuracy.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}45}]:} \PY{n}{optimize}\PY{p}{(}\PY{n}{num\PYZus{}iterations}\PY{o}{=}\PY{l+m+mi}{99}\PY{p}{)}  \PY{c+c1}{\PYZsh{} We already performed 1 iteration above.}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Time elapsed: 0:02:28
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}46}]:} \PY{n}{print\PYZus{}validation\PYZus{}accuracy}\PY{p}{(}\PY{n}{show\PYZus{}example\PYZus{}errors}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Accuracy on Test-Set: 50.7\% (2028 / 4000)
+Example errors:
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_94_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Performance after 1000 optimization
+iterations}\label{performance-after-1000-optimization-iterations}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}47}]:} \PY{n}{optimize}\PY{p}{(}\PY{n}{num\PYZus{}iterations}\PY{o}{=}\PY{l+m+mi}{900}\PY{p}{)}  \PY{c+c1}{\PYZsh{} We performed 100 iterations above.}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Epoch 2 --- Training Accuracy:  62.5\%, Validation Accuracy:  53.1\%, Validation Loss: 0.686
+Time elapsed: 0:17:39
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}48}]:} \PY{n}{print\PYZus{}validation\PYZus{}accuracy}\PY{p}{(}\PY{n}{show\PYZus{}example\PYZus{}errors}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Accuracy on Test-Set: 67.9\% (2715 / 4000)
+Example errors:
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_97_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Performance after 10,000 optimization
+iterations}\label{performance-after-10000-optimization-iterations}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}49}]:} \PY{n}{optimize}\PY{p}{(}\PY{n}{num\PYZus{}iterations}\PY{o}{=}\PY{l+m+mi}{9000}\PY{p}{)} \PY{c+c1}{\PYZsh{} We performed 1000 iterations above.}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Epoch 3 --- Training Accuracy:  65.6\%, Validation Accuracy:  65.6\%, Validation Loss: 0.606
+Epoch 4 --- Training Accuracy:  71.9\%, Validation Accuracy:  81.2\%, Validation Loss: 0.426
+Epoch 5 --- Training Accuracy:  78.1\%, Validation Accuracy:  75.0\%, Validation Loss: 0.527
+Epoch 6 --- Training Accuracy:  81.2\%, Validation Accuracy:  78.1\%, Validation Loss: 0.473
+Epoch 7 --- Training Accuracy:  81.2\%, Validation Accuracy:  81.2\%, Validation Loss: 0.461
+Epoch 8 --- Training Accuracy:  84.4\%, Validation Accuracy:  59.4\%, Validation Loss: 0.734
+Epoch 9 --- Training Accuracy:  84.4\%, Validation Accuracy:  75.0\%, Validation Loss: 0.487
+Epoch 10 --- Training Accuracy:  90.6\%, Validation Accuracy:  68.8\%, Validation Loss: 0.607
+Epoch 11 --- Training Accuracy:  90.6\%, Validation Accuracy:  93.8\%, Validation Loss: 0.239
+Epoch 12 --- Training Accuracy:  90.6\%, Validation Accuracy:  81.2\%, Validation Loss: 0.353
+Epoch 13 --- Training Accuracy:  90.6\%, Validation Accuracy:  90.6\%, Validation Loss: 0.264
+Epoch 14 --- Training Accuracy:  90.6\%, Validation Accuracy:  84.4\%, Validation Loss: 0.415
+Epoch 15 --- Training Accuracy:  93.8\%, Validation Accuracy:  65.6\%, Validation Loss: 0.717
+Epoch 16 --- Training Accuracy:  93.8\%, Validation Accuracy:  68.8\%, Validation Loss: 0.653
+Time elapsed: 3:33:24
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}50}]:} \PY{n}{print\PYZus{}validation\PYZus{}accuracy}\PY{p}{(}\PY{n}{show\PYZus{}example\PYZus{}errors}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{show\PYZus{}confusion\PYZus{}matrix}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Accuracy on Test-Set: 79.5\% (3181 / 4000)
+Example errors:
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_100_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Confusion Matrix:
+[[1670  344]
+ [ 475 1511]]
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_100_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Test on Sample Image}\label{test-on-sample-image}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}56}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{test\PYZus{}cat} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{imread}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cat.jpg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{test\PYZus{}cat} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{resize}\PY{p}{(}\PY{n}{test\PYZus{}cat}\PY{p}{,} \PY{p}{(}\PY{n}{img\PYZus{}size}\PY{p}{,} \PY{n}{img\PYZus{}size}\PY{p}{)}\PY{p}{,} \PY{n}{cv2}\PY{o}{.}\PY{n}{INTER\PYZus{}LINEAR}\PY{p}{)} \PY{o}{/} \PY{l+m+mi}{255}
+         
+         \PY{n}{preview\PYZus{}cat} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{test\PYZus{}cat}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{img\PYZus{}size}\PY{p}{,} \PY{n}{img\PYZus{}size}\PY{p}{,} \PY{n}{num\PYZus{}channels}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_102_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}57}]:} \PY{n}{test\PYZus{}dog} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{imread}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lucy.jpg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{test\PYZus{}dog} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{resize}\PY{p}{(}\PY{n}{test\PYZus{}dog}\PY{p}{,} \PY{p}{(}\PY{n}{img\PYZus{}size}\PY{p}{,} \PY{n}{img\PYZus{}size}\PY{p}{)}\PY{p}{,} \PY{n}{cv2}\PY{o}{.}\PY{n}{INTER\PYZus{}LINEAR}\PY{p}{)} \PY{o}{/} \PY{l+m+mi}{255}
+         
+         \PY{n}{preview\PYZus{}dog} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{test\PYZus{}dog}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{img\PYZus{}size}\PY{p}{,} \PY{n}{img\PYZus{}size}\PY{p}{,} \PY{n}{num\PYZus{}channels}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_103_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}58}]:} \PY{k}{def} \PY{n+nf}{sample\PYZus{}prediction}\PY{p}{(}\PY{n}{test\PYZus{}im}\PY{p}{)}\PY{p}{:}
+             
+             \PY{n}{feed\PYZus{}dict\PYZus{}test} \PY{o}{=} \PY{p}{\PYZob{}}
+                 \PY{n}{x}\PY{p}{:} \PY{n}{test\PYZus{}im}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{img\PYZus{}size\PYZus{}flat}\PY{p}{)}\PY{p}{,}
+                 \PY{n}{y\PYZus{}true}\PY{p}{:} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+             \PY{p}{\PYZcb{}}
+         
+             \PY{n}{test\PYZus{}pred} \PY{o}{=} \PY{n}{session}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{n}{y\PYZus{}pred\PYZus{}cls}\PY{p}{,} \PY{n}{feed\PYZus{}dict}\PY{o}{=}\PY{n}{feed\PYZus{}dict\PYZus{}test}\PY{p}{)}
+             \PY{k}{return} \PY{n}{classes}\PY{p}{[}\PY{n}{test\PYZus{}pred}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{]}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Predicted class for test\PYZus{}cat: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{sample\PYZus{}prediction}\PY{p}{(}\PY{n}{test\PYZus{}cat}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Predicted class for test\PYZus{}dog: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{sample\PYZus{}prediction}\PY{p}{(}\PY{n}{test\PYZus{}dog}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Predicted class for test\_cat: dogs
+Predicted class for test\_dog: cats
+
+    \end{Verbatim}
+
+    \subsection{Visualization of Weights and
+Layers}\label{visualization-of-weights-and-layers}
+
+In trying to understand why the convolutional neural network can
+recognize images, we will now visualize the weights of the convolutional
+filters and the resulting output images.
+
+    \subsubsection{Helper-function for plotting convolutional
+weights}\label{helper-function-for-plotting-convolutional-weights}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}59}]:} \PY{k}{def} \PY{n+nf}{plot\PYZus{}conv\PYZus{}weights}\PY{p}{(}\PY{n}{weights}\PY{p}{,} \PY{n}{input\PYZus{}channel}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} Assume weights are TensorFlow ops for 4\PYZhy{}dim variables}
+             \PY{c+c1}{\PYZsh{} e.g. weights\PYZus{}conv1 or weights\PYZus{}conv2.}
+             
+             \PY{c+c1}{\PYZsh{} Retrieve the values of the weight\PYZhy{}variables from TensorFlow.}
+             \PY{c+c1}{\PYZsh{} A feed\PYZhy{}dict is not necessary because nothing is calculated.}
+             \PY{n}{w} \PY{o}{=} \PY{n}{session}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{n}{weights}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} Get the lowest and highest values for the weights.}
+             \PY{c+c1}{\PYZsh{} This is used to correct the colour intensity across}
+             \PY{c+c1}{\PYZsh{} the images so they can be compared with each other.}
+             \PY{n}{w\PYZus{}min} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{n}{w}\PY{p}{)}
+             \PY{n}{w\PYZus{}max} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{w}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} Number of filters used in the conv. layer.}
+             \PY{n}{num\PYZus{}filters} \PY{o}{=} \PY{n}{w}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}
+         
+             \PY{c+c1}{\PYZsh{} Number of grids to plot.}
+             \PY{c+c1}{\PYZsh{} Rounded\PYZhy{}up, square\PYZhy{}root of the number of filters.}
+             \PY{n}{num\PYZus{}grids} \PY{o}{=} \PY{n}{math}\PY{o}{.}\PY{n}{ceil}\PY{p}{(}\PY{n}{math}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{num\PYZus{}filters}\PY{p}{)}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} Create figure with a grid of sub\PYZhy{}plots.}
+             \PY{n}{fig}\PY{p}{,} \PY{n}{axes} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{num\PYZus{}grids}\PY{p}{,} \PY{n}{num\PYZus{}grids}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} Plot all the filter\PYZhy{}weights.}
+             \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{ax} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{axes}\PY{o}{.}\PY{n}{flat}\PY{p}{)}\PY{p}{:}
+                 \PY{c+c1}{\PYZsh{} Only plot the valid filter\PYZhy{}weights.}
+                 \PY{k}{if} \PY{n}{i}\PY{o}{\PYZlt{}}\PY{n}{num\PYZus{}filters}\PY{p}{:}
+                     \PY{c+c1}{\PYZsh{} Get the weights for the i\PYZsq{}th filter of the input channel.}
+                     \PY{c+c1}{\PYZsh{} See new\PYZus{}conv\PYZus{}layer() for details on the format}
+                     \PY{c+c1}{\PYZsh{} of this 4\PYZhy{}dim tensor.}
+                     \PY{n}{img} \PY{o}{=} \PY{n}{w}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{p}{,} \PY{n}{input\PYZus{}channel}\PY{p}{,} \PY{n}{i}\PY{p}{]}
+         
+                     \PY{c+c1}{\PYZsh{} Plot image.}
+                     \PY{n}{ax}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{img}\PY{p}{,} \PY{n}{vmin}\PY{o}{=}\PY{n}{w\PYZus{}min}\PY{p}{,} \PY{n}{vmax}\PY{o}{=}\PY{n}{w\PYZus{}max}\PY{p}{,}
+                               \PY{n}{interpolation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nearest}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{seismic}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                 
+                 \PY{c+c1}{\PYZsh{} Remove ticks from the plot.}
+                 \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xticks}\PY{p}{(}\PY{p}{[}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}yticks}\PY{p}{(}\PY{p}{[}\PY{p}{]}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} Ensure the plot is shown correctly with multiple plots}
+             \PY{c+c1}{\PYZsh{} in a single Notebook cell.}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsubsection{Helper-function for plotting the output of a
+convolutional
+layer}\label{helper-function-for-plotting-the-output-of-a-convolutional-layer}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}60}]:} \PY{k}{def} \PY{n+nf}{plot\PYZus{}conv\PYZus{}layer}\PY{p}{(}\PY{n}{layer}\PY{p}{,} \PY{n}{image}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} Assume layer is a TensorFlow op that outputs a 4\PYZhy{}dim tensor}
+             \PY{c+c1}{\PYZsh{} which is the output of a convolutional layer,}
+             \PY{c+c1}{\PYZsh{} e.g. layer\PYZus{}conv1 or layer\PYZus{}conv2.}
+             
+             \PY{n}{image} \PY{o}{=} \PY{n}{image}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{img\PYZus{}size\PYZus{}flat}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} Create a feed\PYZhy{}dict containing just one image.}
+             \PY{c+c1}{\PYZsh{} Note that we don\PYZsq{}t need to feed y\PYZus{}true because it is}
+             \PY{c+c1}{\PYZsh{} not used in this calculation.}
+             \PY{n}{feed\PYZus{}dict} \PY{o}{=} \PY{p}{\PYZob{}}\PY{n}{x}\PY{p}{:} \PY{p}{[}\PY{n}{image}\PY{p}{]}\PY{p}{\PYZcb{}}
+         
+             \PY{c+c1}{\PYZsh{} Calculate and retrieve the output values of the layer}
+             \PY{c+c1}{\PYZsh{} when inputting that image.}
+             \PY{n}{values} \PY{o}{=} \PY{n}{session}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{n}{layer}\PY{p}{,} \PY{n}{feed\PYZus{}dict}\PY{o}{=}\PY{n}{feed\PYZus{}dict}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} Number of filters used in the conv. layer.}
+             \PY{n}{num\PYZus{}filters} \PY{o}{=} \PY{n}{values}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}
+         
+             \PY{c+c1}{\PYZsh{} Number of grids to plot.}
+             \PY{c+c1}{\PYZsh{} Rounded\PYZhy{}up, square\PYZhy{}root of the number of filters.}
+             \PY{n}{num\PYZus{}grids} \PY{o}{=} \PY{n}{math}\PY{o}{.}\PY{n}{ceil}\PY{p}{(}\PY{n}{math}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{num\PYZus{}filters}\PY{p}{)}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} Create figure with a grid of sub\PYZhy{}plots.}
+             \PY{n}{fig}\PY{p}{,} \PY{n}{axes} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{num\PYZus{}grids}\PY{p}{,} \PY{n}{num\PYZus{}grids}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} Plot the output images of all the filters.}
+             \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{ax} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{axes}\PY{o}{.}\PY{n}{flat}\PY{p}{)}\PY{p}{:}
+                 \PY{c+c1}{\PYZsh{} Only plot the images for valid filters.}
+                 \PY{k}{if} \PY{n}{i}\PY{o}{\PYZlt{}}\PY{n}{num\PYZus{}filters}\PY{p}{:}
+                     \PY{c+c1}{\PYZsh{} Get the output image of using the i\PYZsq{}th filter.}
+                     \PY{c+c1}{\PYZsh{} See new\PYZus{}conv\PYZus{}layer() for details on the format}
+                     \PY{c+c1}{\PYZsh{} of this 4\PYZhy{}dim tensor.}
+                     \PY{n}{img} \PY{o}{=} \PY{n}{values}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{p}{,} \PY{n}{i}\PY{p}{]}
+         
+                     \PY{c+c1}{\PYZsh{} Plot image.}
+                     \PY{n}{ax}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{img}\PY{p}{,} \PY{n}{interpolation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nearest}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{binary}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                 
+                 \PY{c+c1}{\PYZsh{} Remove ticks from the plot.}
+                 \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xticks}\PY{p}{(}\PY{p}{[}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}yticks}\PY{p}{(}\PY{p}{[}\PY{p}{]}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} Ensure the plot is shown correctly with multiple plots}
+             \PY{c+c1}{\PYZsh{} in a single Notebook cell.}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsubsection{Input Images}\label{input-images}
+
+    Helper-function for plotting an image.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}61}]:} \PY{k}{def} \PY{n+nf}{plot\PYZus{}image}\PY{p}{(}\PY{n}{image}\PY{p}{)}\PY{p}{:}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{image}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{img\PYZus{}size}\PY{p}{,} \PY{n}{img\PYZus{}size}\PY{p}{,} \PY{n}{num\PYZus{}channels}\PY{p}{)}\PY{p}{,}
+                        \PY{n}{interpolation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nearest}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    Plot an image from the test-set which will be used as an example below.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}62}]:} \PY{n}{image1} \PY{o}{=} \PY{n}{test\PYZus{}images}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{plot\PYZus{}image}\PY{p}{(}\PY{n}{image1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_114_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Plot another example image from the test-set.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}63}]:} \PY{n}{image2} \PY{o}{=} \PY{n}{test\PYZus{}images}\PY{p}{[}\PY{l+m+mi}{13}\PY{p}{]}
+         \PY{n}{plot\PYZus{}image}\PY{p}{(}\PY{n}{image2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_116_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{Convolution Layer 1}\label{convolution-layer-1}
+
+    Now plot the filter-weights for the first convolutional layer.
+
+Note that positive weights are red and negative weights are blue.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}64}]:} \PY{n}{plot\PYZus{}conv\PYZus{}weights}\PY{p}{(}\PY{n}{weights}\PY{o}{=}\PY{n}{weights\PYZus{}conv1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_119_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Applying each of these convolutional filters to the first input image
+gives the following output images, which are then used as input to the
+second convolutional layer. Note that these images are down-sampled to
+about half the resolution of the original input image.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}65}]:} \PY{n}{plot\PYZus{}conv\PYZus{}layer}\PY{p}{(}\PY{n}{layer}\PY{o}{=}\PY{n}{layer\PYZus{}conv1}\PY{p}{,} \PY{n}{image}\PY{o}{=}\PY{n}{image1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_121_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The following images are the results of applying the convolutional
+filters to the second image.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}66}]:} \PY{n}{plot\PYZus{}conv\PYZus{}layer}\PY{p}{(}\PY{n}{layer}\PY{o}{=}\PY{n}{layer\PYZus{}conv1}\PY{p}{,} \PY{n}{image}\PY{o}{=}\PY{n}{image2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_123_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{Convolution Layer 2}\label{convolution-layer-2}
+
+    Now plot the filter-weights for the second convolutional layer.
+
+There are 16 output channels from the first conv-layer, which means
+there are 16 input channels to the second conv-layer. The second
+conv-layer has a set of filter-weights for each of its input channels.
+We start by plotting the filter-weigths for the first channel.
+
+Note again that positive weights are red and negative weights are blue.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}67}]:} \PY{n}{plot\PYZus{}conv\PYZus{}weights}\PY{p}{(}\PY{n}{weights}\PY{o}{=}\PY{n}{weights\PYZus{}conv2}\PY{p}{,} \PY{n}{input\PYZus{}channel}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_126_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    There are 16 input channels to the second convolutional layer, so we can
+make another 15 plots of filter-weights like this. We just make one more
+with the filter-weights for the second channel.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}68}]:} \PY{n}{plot\PYZus{}conv\PYZus{}weights}\PY{p}{(}\PY{n}{weights}\PY{o}{=}\PY{n}{weights\PYZus{}conv2}\PY{p}{,} \PY{n}{input\PYZus{}channel}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_128_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    It can be difficult to understand and keep track of how these filters
+are applied because of the high dimensionality.
+
+Applying these convolutional filters to the images that were ouput from
+the first conv-layer gives the following images.
+
+Note that these are down-sampled yet again to half the resolution of the
+images from the first conv-layer.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}69}]:} \PY{n}{plot\PYZus{}conv\PYZus{}layer}\PY{p}{(}\PY{n}{layer}\PY{o}{=}\PY{n}{layer\PYZus{}conv2}\PY{p}{,} \PY{n}{image}\PY{o}{=}\PY{n}{image1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_130_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    And these are the results of applying the filter-weights to the second
+image.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}70}]:} \PY{n}{plot\PYZus{}conv\PYZus{}layer}\PY{p}{(}\PY{n}{layer}\PY{o}{=}\PY{n}{layer\PYZus{}conv2}\PY{p}{,} \PY{n}{image}\PY{o}{=}\PY{n}{image2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_132_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{Write Test Predictions to
+CSV}\label{write-test-predictions-to-csv}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}71}]:} \PY{c+c1}{\PYZsh{} def write\PYZus{}predictions(ims, ids):}
+         \PY{c+c1}{\PYZsh{}     ims = ims.reshape(ims.shape[0], img\PYZus{}size\PYZus{}flat)}
+         \PY{c+c1}{\PYZsh{}     preds = session.run(y\PYZus{}pred, feed\PYZus{}dict=\PYZob{}x: ims\PYZcb{})}
+         \PY{c+c1}{\PYZsh{}     result = pd.DataFrame(preds, columns=classes)}
+         \PY{c+c1}{\PYZsh{}     result.loc[:, \PYZsq{}id\PYZsq{}] = pd.Series(ids, index=result.index)}
+         \PY{c+c1}{\PYZsh{}     pred\PYZus{}file = \PYZsq{}predictions.csv\PYZsq{}}
+         \PY{c+c1}{\PYZsh{}     result.to\PYZus{}csv(pred\PYZus{}file, index=False)}
+         
+         \PY{c+c1}{\PYZsh{} write\PYZus{}predictions(test\PYZus{}images, test\PYZus{}ids)}
+\end{Verbatim}
+
+
+    \subsubsection{Close TensorFlow Session}\label{close-tensorflow-session}
+
+    We are now done using TensorFlow, so we close the session to release its
+resources.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}72}]:} \PY{n}{session}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
